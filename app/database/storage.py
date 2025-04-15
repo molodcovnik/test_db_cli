@@ -41,9 +41,6 @@ class Storage(TransactionStorage):
         except AttributeError:
             print("Ошибка в команде")
 
-    def get_storage(self):
-        return self.storage
-
     @use_current_transaction
     def set_value(self, data: dict):
         if data.get('name') is not None:
@@ -68,9 +65,12 @@ class Storage(TransactionStorage):
     @use_current_transaction
     def find_vars(self, data: dict):
         items = self.storage.items()
+        variables = []
         for name, value in items:
             if value == data.get('value'):
                 print(name)
+                variables.append(name)
+        return variables
 
     def get_help(self):
         print(HELP_TEXT)

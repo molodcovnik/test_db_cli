@@ -2,6 +2,9 @@ class TransactionStorage:
     def __init__(self):
         self.transaction_stack = list()
 
+    def _get_transaction_stack(self):
+        return self.transaction_stack
+
     def begin(self):
         if self.transaction_stack:
             self.transaction_stack.append(self.transaction_stack[-1].copy())
