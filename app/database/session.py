@@ -1,12 +1,18 @@
 from database.commands import Command
-from database.storage import Storage
+from database.services.help import START_TEXT
 
 
 class Session:
     @staticmethod
     def get_session():
-        while True:
-            command = input("Введите команду (GET A, SET A 10): ")
-            if command.upper() == Command.END:
-                break
-            yield command
+        print(START_TEXT)
+        try:
+            while True:
+                command = input("Введите команду: ")
+                if command.upper() == Command.END:
+                    break
+                yield command
+        except EOFError:
+            print('\nСессия закрыта!')
+        except KeyboardInterrupt:
+            print("\nПользователь закрыл сессию.")

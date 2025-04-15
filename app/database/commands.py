@@ -29,10 +29,11 @@ class Command(TransactionCommand):
     UNSET = "UNSET" ### удаление
     FIND = "FIND" ### выводит найденные установленные переменные для данного значения.
     END = "END" ### закрывает приложение.
+    HELP = "HELP" ### Справка
 
     @classmethod
     def get_all_commands(cls):
-        return [cls.GET, cls.SET, cls.COUNTS, cls.UNSET, cls.FIND, cls.END, cls.BEGIN, cls.ROLLBACK, cls.COMMIT]
+        return [cls.GET, cls.SET, cls.COUNTS, cls.UNSET, cls.FIND, cls.END, cls.BEGIN, cls.ROLLBACK, cls.COMMIT, cls.HELP]
 
     @classmethod
     def get_command(cls, value: str):
@@ -107,24 +108,3 @@ class Command(TransactionCommand):
             case 4:
                 arg = string.split()[-1]
                 return f"Лишний аргумент {arg}"
-
-
-
-"""
-Пример
-> GET A
-NULL
-> SET A 10
-> GET A
-10
-> COUNTS 10
-1
-> SET B 20
-> SET C 10
-> COUNTS 10
-2
-> UNSET B
-> GET B
-NULL
-> END
-"""
