@@ -30,7 +30,7 @@ class Storage(TransactionStorage):
                 case Command.FIND:
                     self.find_vars(data)
                 case Command.BEGIN:
-                    self.begin()
+                    self.begin(self.storage)
                 case Command.ROLLBACK:
                     self.rollback()
                 case Command.COMMIT:
