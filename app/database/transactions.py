@@ -5,11 +5,11 @@ class TransactionStorage:
     def _get_transaction_stack(self):
         return self.transaction_stack
 
-    def begin(self):
+    def begin(self, base_storage):
         if self.transaction_stack:
             self.transaction_stack.append(self.transaction_stack[-1].copy())
         else:
-            self.transaction_stack.append({})
+            self.transaction_stack.append(base_storage)
 
     def commit(self):
         if not self.transaction_stack:
@@ -17,7 +17,7 @@ class TransactionStorage:
             return
 
         last = self.transaction_stack.pop()
-        print(last)
+
         if self.transaction_stack:
             self.transaction_stack[-1].update(last)
         else:
